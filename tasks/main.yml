@@ -1,0 +1,64 @@
+---
+# tasks file for htpc-common
+
+- block:
+
+  - name: Make sure SSH server is installed for remote access
+    apt: name=ssh state=installed update_cache=yes cache_valid_time=3600
+
+  - name: Make sure SSH is started on boot
+    service: name=ssh state=started enabled=yes
+  
+  tags: ssh
+  when: htpc_user_ssh_service
+
+
+- block:
+
+  - name: Create htpc group
+    group: name={{ htpc_user_group }} state=present
+
+  - name: Generate htpc user password
+    command: /usr/bin/openssl passwd -salt random_salt -1 {{ htpc_user_password }}
+    register: htpc_user_generated_password
+    changed_when: false
+
+  - name: Create htpc user
+    user: 
+      name={{ htpc_user_username }}
+      password={{ htpc_user_generated_password.stdout }}
+      group={{ htpc_user_group }}
+      update_password=on_create
+      state=present 
+      createhome=yes 
+      shell={{ htpc_user_shell }} 
+      groups=adm,cdrom,dip,plugdev,lpadmin,sambashare
+      append=yes
+    register: htpc_user_verify_user
+
+  - name: Set Fact "htpc_user_uid"
+    set_fact: htpc_user_uid={{ htpc_user_verify_user.uid }}
+
+  - name: Set Fact "htpc_user_gid"
+    set_fact: htpc_user_gid={{ htpc_user_verify_user.group }}
+
+  - name: Enable sudo for htpc user
+    user: 
+      name={{ htpc_user_username }}
+      groups=sudo
+      append=yes
+    when: htpc_user_sudo_access
+  
+  tags:
+    - user
+
+- name: Create Media Folders
+  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
+  with_items:
+    - "{{ htpc_media_path }}/{{ htpc_media_movies }}"
+    - "{{ htpc_media_path }}/{{ htpc_media_tv }}"
+    - "{{ htpc_media_path }}/{{ htpc_media_music }}"
+    - "{{ htpc_media_path }}/{{ htpc_media_pictures }}"
+    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}"
+  tags:
+    - media
