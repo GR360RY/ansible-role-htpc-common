@@ -11,8 +11,7 @@ galaxy_info:
       - trusty
   
   galaxy_tags:
-    - user
-    - ssh
-    - media
+    - htpc
+    - system
 
 dependencies: []

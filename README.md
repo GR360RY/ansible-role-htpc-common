@@ -1,12 +1,15 @@
 htpc-common
 ===========
 
-[![Galaxy](http://img.shields.io/badge/galaxy-GR360RY.htpc--common-green.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/4926)
+[![Galaxy](http://img.shields.io/badge/galaxy-GR360RY.htpc--common-green.svg?style=flat-square)](https://galaxy-qa.ansible.com/GR360RY/htpc-common/)
 
 An ansible role to perform common tasks on HTPC. 
 
+Overview
+--------
+
 1. Install ssh server to allow remote management.
-2. Configure avahi service.
+2. Configure Zerconf networking and avahi-alias service.
 3. Create htpc_user if user doesn't exist.
 4. Enable sudo access for htpc user.
 5. Create htpc media and downloads folders.
@@ -33,7 +36,8 @@ Role Variables
  htpc_media_tv          | tv        
  htpc_media_music       | music     
  htpc_media_pictures    | pictures  
- htpc_media_downloads	| downloads 
+ htpc_media_downloads	| downloads
+ htpc_zeroconf          | yes 
 
 Dependencies
 ------------

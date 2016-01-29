@@ -1,6 +1,7 @@
 ---
 # tasks file for htpc-common
 
+# BLOCK: Configure SSH service
 - block:
 
   - name: Make sure SSH server is installed for remote access
@@ -12,7 +13,7 @@
   tags: ssh
   when: htpc_user_ssh_service
 
-
+# BLOCK: Create htpc group and user, enable sudo access
 - block:
 
   - name: Create htpc group
@@ -52,6 +53,7 @@
   tags:
     - user
 
+# Create media folders
 - name: Create Media Folders
   file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
   with_items:
@@ -62,3 +64,24 @@
     - "{{ htpc_media_path }}/{{ htpc_media_downloads }}"
   tags:
     - media
+
+# BLOCK: Configure avahi and avahi alias
+- block:
+  
+  - name: Install Avahi packages
+    apt: name={{ item }} state=installed update_cache=yes cache_valid_time=3600
+    with_items:
+      - avahi-daemon
+      - libnss-mdns
+      - python-avahi
+      - python-pip
+      - git
+
+  - name: Install avahi-aliases service
+    pip: name='git+http://github.com/GR360RY/avahi-aliases' editable=false
+
+  - name: Make sure avahi-aliases enabled and starts on boot
+    service: name=avahi-aliases state=started enabled=yes
+
+  tags: avahi
+  when: htpc_zeroconf

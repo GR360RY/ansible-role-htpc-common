@@ -13,3 +13,4 @@ htpc_media_tv: tv
 htpc_media_music: music
 htpc_media_pictures: pictures
 htpc_media_downloads: downloads
+htpc_zeroconf: yes
