@@ -1,7 +1,7 @@
 htpc-common
 ===========
 
-[![Galaxy](http://img.shields.io/badge/galaxy-GR360RY.htpc--common-green.svg?style=flat-square)](https://galaxy-qa.ansible.com/GR360RY/htpc-common/)
+[![Galaxy](http://img.shields.io/badge/galaxy-GR360RY.htpc--common-green.svg?style=flat-square)](https://galaxy.ansible.com/GR360RY/htpc-common/)
 
 An ansible role to perform common tasks on HTPC. 
 
