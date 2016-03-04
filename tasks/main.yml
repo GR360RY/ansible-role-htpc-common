@@ -61,9 +61,21 @@
     - "{{ htpc_media_path }}/{{ htpc_media_tv }}"
     - "{{ htpc_media_path }}/{{ htpc_media_music }}"
     - "{{ htpc_media_path }}/{{ htpc_media_pictures }}"
-    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}"
   tags:
     - media
+
+- name: Create Downloads Folder
+  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
+  with_items:
+    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}"
+
+- name: Create Processing folders
+  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755 recurse=yes
+  with_items:
+    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}/incomplete/process/"
+    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}/incomplete/process/movie"
+    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}/incomplete/process/tv"
+  when: nzbtomedia_enabled is defined and nzbtomedia_enabled
 
 # BLOCK: Configure avahi and avahi alias
 - block:
