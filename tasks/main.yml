@@ -61,6 +61,7 @@
     - "{{ htpc_media_path }}/{{ htpc_media_tv }}"
     - "{{ htpc_media_path }}/{{ htpc_media_music }}"
     - "{{ htpc_media_path }}/{{ htpc_media_pictures }}"
+  when: htpc_create_media_folders
   tags:
     - media
 
