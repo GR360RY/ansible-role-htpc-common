@@ -19,6 +19,8 @@ Downloads and Media folders layout if used with default variable values:
 ```
 /mnt/media/
 ├── downloads
+│   ├── complete
+│   └── incomplete
 ├── movies
 ├── music
 ├── pictures
@@ -33,22 +35,23 @@ Ansible 2.0
 Role Variables
 --------------
 
-Name                      | Default   
---------------------------|------------
-htpc_user_username        | htpc      
-htpc_user_password        | htpc      
-htpc_user_group           | htpc      
-htpc_user_shell           | /bin/bash
-htpc_user_ssh_service     | yes       
-htpc_user_sudo_access     | yes     
-htpc_create_media_folders | yes
-htpc_media_path           | /mnt/media
-htpc_media_movies         | movies    
-htpc_media_tv             | tv        
-htpc_media_music          | music     
-htpc_media_pictures       | pictures  
-htpc_media_downloads      | downloads
-htpc_zeroconf             | yes
+	# defaults file for htpc-common
+
+	htpc_user_username: htpc
+	htpc_user_password: htpc
+	htpc_user_group: htpc
+	htpc_user_shell: /bin/bash
+	htpc_user_sudo_access: yes
+	htpc_ssh_service: yes
+	htpc_create_media_folders: yes
+	htpc_zeroconf: yes
+	htpc_media_path: /mnt/media
+	htpc_media_movies: movies
+	htpc_media_tv: tv
+	htpc_media_music: music
+	htpc_media_pictures: pictures
+	htpc_downloads_complete: "{{ htpc_media_path }}/downloads/complete"
+	htpc_downloads_incomplete: "{{ htpc_media_path }}/downloads/incomplete"
 
 Dependencies
 ------------

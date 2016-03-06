@@ -11,7 +11,7 @@
     service: name=ssh state=started enabled=yes
   
   tags: ssh
-  when: htpc_user_ssh_service
+  when: htpc_ssh_service
 
 # BLOCK: Create htpc group and user, enable sudo access
 - block:
@@ -68,14 +68,15 @@
 - name: Create Downloads Folder
   file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
   with_items:
-    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}"
+    - "{{ htpc_downloads_complete }}"
+    - "{{ htpc_downloads_incomplete }}"
 
-- name: Create Processing folders
-  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755 recurse=yes
+- name: Create Processing Folders
+  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
   with_items:
-    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}/incomplete/process/"
-    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}/incomplete/process/movie"
-    - "{{ htpc_media_path }}/{{ htpc_media_downloads }}/incomplete/process/tv"
+    - "{{ htpc_downloads_incomplete }}/process/"
+    - "{{ htpc_downloads_incomplete }}/process/movie"
+    - "{{ htpc_downloads_incomplete }}/process/tv"
   when: nzbtomedia_enabled is defined and nzbtomedia_enabled
 
 # BLOCK: Configure avahi and avahi alias
