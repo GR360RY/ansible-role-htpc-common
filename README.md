@@ -35,23 +35,25 @@ Ansible 2.0
 Role Variables
 --------------
 
-	# defaults file for htpc-common
+```
+# defaults file for htpc-common
 
-	htpc_user_username: htpc
-	htpc_user_password: htpc
-	htpc_user_group: htpc
-	htpc_user_shell: /bin/bash
-	htpc_user_sudo_access: yes
-	htpc_ssh_service: yes
-	htpc_create_media_folders: yes
-	htpc_zeroconf: yes
-	htpc_media_path: /mnt/media
-	htpc_media_movies: movies
-	htpc_media_tv: tv
-	htpc_media_music: music
-	htpc_media_pictures: pictures
-	htpc_downloads_complete: "{{ htpc_media_path }}/downloads/complete"
-	htpc_downloads_incomplete: "{{ htpc_media_path }}/downloads/incomplete"
+htpc_user_username: htpc
+htpc_user_password: htpc
+htpc_user_group: htpc
+htpc_user_shell: /bin/bash
+htpc_user_sudo_access: yes
+htpc_ssh_service: yes
+htpc_create_media_folders: yes
+htpc_zeroconf: yes
+htpc_media_path: /mnt/media
+htpc_media_movies: movies
+htpc_media_tv: tv
+htpc_media_music: music
+htpc_media_pictures: pictures
+htpc_downloads_complete: "{{ htpc_media_path }}/downloads/complete"
+htpc_downloads_incomplete: "{{ htpc_media_path }}/downloads/incomplete"
+```
 
 Dependencies
 ------------
@@ -61,19 +63,22 @@ None
 Example Playbook
 ----------------
 
-    - hosts: htpc
+```
+- hosts: htpc
+  become: yes
 
-      vars:
-        
-        htpc_user_username: foo
-        htpc_user_group: foo
-        htpc_user_password: bar
-        htpc_media_path: /media/big_disk
-        htpc_media_movies: "My Movies"
+  vars:
+
+    htpc_user_username: foo
+    htpc_user_group: foo
+    htpc_user_password: bar
+	htpc_media_path: /media/big_disk
+	htpc_media_movies: "My Movies"
 
 
-      roles:
-         - role: GR360RY.htpc-common
+  roles:
+    - role: GR360RY.htpc-common
+```
 
 HTPC-Ansible Project
 --------------------
