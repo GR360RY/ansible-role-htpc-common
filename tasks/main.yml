@@ -65,7 +65,7 @@
   tags:
     - media
 
-- name: Create Downloads Folder
+- name: Create Downloads Folders
   file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
   with_items:
     - "{{ htpc_downloads_complete }}"
@@ -77,7 +77,6 @@
     - "{{ htpc_downloads_incomplete }}/process/"
     - "{{ htpc_downloads_incomplete }}/process/movie"
     - "{{ htpc_downloads_incomplete }}/process/tv"
-  when: nzbtomedia_enabled is defined and nzbtomedia_enabled
 
 # BLOCK: Configure avahi and avahi alias
 - block:
