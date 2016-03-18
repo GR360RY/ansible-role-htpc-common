@@ -64,7 +64,7 @@ Example Playbook
 ----------------
 
 ```
-- hosts: htpc
+- hosts: htpc-server
   become: yes
 
   vars:
