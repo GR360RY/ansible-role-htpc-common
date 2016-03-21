@@ -55,7 +55,7 @@
 
 # Create media folders
 - name: Create Media Folders
-  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
+  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755 recurse=yes
   with_items:
     - "{{ htpc_media_path }}/{{ htpc_media_movies }}"
     - "{{ htpc_media_path }}/{{ htpc_media_tv }}"
@@ -66,13 +66,13 @@
     - media
 
 - name: Create Downloads Folders
-  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
+  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755 recurse=yes
   with_items:
     - "{{ htpc_downloads_complete }}"
     - "{{ htpc_downloads_incomplete }}"
 
 - name: Create Processing Folders
-  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755
+  file: path={{ item }} state=directory owner={{ htpc_user_username }} group={{ htpc_user_group }} mode=0755 recurse=yes
   with_items:
     - "{{ htpc_downloads_incomplete }}/process/"
     - "{{ htpc_downloads_incomplete }}/process/movie"

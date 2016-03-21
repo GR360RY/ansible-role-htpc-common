@@ -1,7 +1,7 @@
 htpc-common
 ===========
 
-[![Galaxy](http://img.shields.io/badge/galaxy-GR360RY.htpc--common-green.svg?style=flat-square)](https://galaxy.ansible.com/GR360RY/htpc-common/)
+[![Build Status](https://travis-ci.org/GR360RY/ansible-role-htpc-common.svg?branch=master)](https://travis-ci.org/GR360RY/ansible-role-htpc-common) [![Galaxy](http://img.shields.io/badge/galaxy-GR360RY.htpc--common-green.svg?style=flat-square)](https://galaxy.ansible.com/GR360RY/htpc-common/)
 
 An ansible role to perform common tasks on HTPC. 
 
