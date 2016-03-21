@@ -33,7 +33,7 @@
       state=present 
       createhome=yes 
       shell={{ htpc_user_shell }} 
-      groups=adm,cdrom,dip,plugdev,lpadmin,sambashare
+      groups=adm,cdrom,dip,plugdev
       append=yes
     register: htpc_user_verify_user
 
