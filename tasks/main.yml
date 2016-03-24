@@ -5,7 +5,7 @@
 - block:
 
   - name: Make sure SSH server is installed for remote access
-    apt: name=ssh state=installed update_cache=yes cache_valid_time=3600
+    apt: name=openssh-server state=installed update_cache=yes cache_valid_time=3600
 
   - name: Make sure SSH is started on boot
     service: name=ssh state=started enabled=yes
