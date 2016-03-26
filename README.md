@@ -38,14 +38,19 @@ Role Variables
 ```
 # defaults file for htpc-common
 
+# htpc user
 htpc_user_username: htpc
 htpc_user_password: htpc
 htpc_user_group: htpc
 htpc_user_shell: /bin/bash
 htpc_user_sudo_access: yes
+
+# services
 htpc_ssh_service: yes
 htpc_create_media_folders: yes
 htpc_zeroconf: yes
+
+# downloads and media directories
 htpc_media_path: /mnt/media
 htpc_media_movies: movies
 htpc_media_tv: tv
@@ -53,6 +58,16 @@ htpc_media_music: music
 htpc_media_pictures: pictures
 htpc_downloads_complete: "{{ htpc_media_path }}/downloads/complete"
 htpc_downloads_incomplete: "{{ htpc_media_path }}/downloads/incomplete"
+
+# Helper variable. In use by other roles
+# Change the way different service are resolved in configuration files.
+# Available values are zeroconf, hostname and staticip
+htpc_resolving: zeroconf
+
+# Helper variable. In use by other roles
+# When installed with docker role, make sure htpc user can access the docker daemon
+docker_group_members:
+  - "{{ htpc_user_username }}"
 ```
 
 Dependencies
